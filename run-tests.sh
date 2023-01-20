@@ -1,5 +1,10 @@
 #!/bin/bash
 
+javac *.java
+
+java PlayerGenerator 50 3.0 0 123
+java PlayerGenerator 1000 15.0 0 123
+java PlayerGenerator 100000 2500.0 0 123
 
 if  test -e Player-List50.data  -a -e Player-List1000.data -a -e Player-List100000.data
 then
