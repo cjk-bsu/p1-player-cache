@@ -17,24 +17,24 @@ public interface CacheInterface<T> {
      *  cache is removed before the new entry is added since the size of the
      *  cache is fixed.
      *
-     * @param element - This parameter is the element to be searched for in
+     * @param target - This parameter is the element to be searched for in
      *                  the cache and returned.
      * @return - This method returns the object once it is either found in or
      *           added to the cache.
      */
-    public T getObject(T element);
+    public T getObject(T target);
 
     /**
      * This method simply adds an object to the front of the cache assuming it
      * isn't already in the cache and the cache has room.
      */
-    public void addObject();
+    public void addObject(T target);
 
     /**
      * This method simply removes the specified object from the cache assuming
      * the object is already in the cache.
      */
-    public void removeObject();
+    public void removeObject(T target);
 
     /**
      * This method clears all entries from the cache.
