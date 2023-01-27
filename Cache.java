@@ -65,13 +65,13 @@ public class Cache<T> implements CacheInterface<T> {
 
     @Override
     public String toString() {
-        int getCalls = (totalCalls - cacheSize);
+        double hitRatio = ((double) hits / totalCalls) * 100;
 
         return("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" +
-                "LinkedList Cache with " + getCalls + "entries has been created\n" +
+                "LinkedList Cache with " + cacheSize + "entries has been created\n" +
                 "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n" +
-                "Total number of references:        " + cacheSize + "\n" +
+                "Total number of references:        " + totalCalls + "\n" +
                 "Total number of cache hits:        " + hits + "\n" +
-                "Cache hit ratio:                   " + (hits / getCalls) + "%\n\n");
+                "Cache hit ratio:                   " + String.format("%.2f", hitRatio) + "%\n");
     }
 }
