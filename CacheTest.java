@@ -1,4 +1,5 @@
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
@@ -81,6 +82,10 @@ public class CacheTest {
                     "----------------------------------------------------------------");
 
             in.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("Specified file not found.");
+            printUsage();
+            return;
         } catch (IOException e) {
             printUsage();
             return;
