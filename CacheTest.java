@@ -1,11 +1,11 @@
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 public class CacheTest {
     private static long startTime, endTime;
-    private static Cache<String> cache;
+    private static Cache<Player> cache;
 
     private static void printUsage() {
         System.out.println("java CacheTest <cache-size> <serialized-data-filename>");
@@ -36,13 +36,29 @@ public class CacheTest {
         startTime = System.currentTimeMillis();
 
         FileInputStream fileIn;
-        LinkedList<String> entries;
+        ArrayList<Player> entries;
 
         try {
             fileIn = new FileInputStream(fileName);
             ObjectInputStream in = new ObjectInputStream(fileIn);
 
-            entries = (LinkedList<String>) in.readObject();
+            entries = (ArrayList<Player>) in.readObject();
+
+            cache = new Cache<Player>(cacheSize);
+
+            for (Player entry : entries) {
+                cache.getObject(entry);
+            }
+
+            endTime = System.currentTimeMillis();
+
+            System.out.println(cache.toString());
+
+            long timeElapsed = endTime - startTime;
+
+            System.out.println("----------------------------------------------------------------\n" +
+                    "Time elapsed: " + timeElapsed + ".0 milliseconds\n" +
+                    "----------------------------------------------------------------");
 
             in.close();
         } catch (IOException e) {
@@ -52,22 +68,5 @@ public class CacheTest {
             printUsage();
             return;
         }
-
-        cache = new Cache<String>(cacheSize);
-
-        for (String entry : entries) {
-            cache.getObject(entry);
-        }
-
-        endTime = System.currentTimeMillis();
-
-        System.out.println(cache.toString());
-
-        long timeElapsed = endTime - startTime;
-
-        System.out.println("----------------------------------------------------------------\n" +
-                "Time elapsed: " + timeElapsed + ".0 milliseconds\n" +
-                "----------------------------------------------------------------\n");
-
     }
 }
